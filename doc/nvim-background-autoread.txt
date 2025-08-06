@@ -11,7 +11,7 @@ CONTENTS                                     *nvim-background-autoread-contents*
 1. Introduction                  *nvim-background-autoread-introduction*
 
 This plugin automatically reloads buffers in the background when they are
-changed on disk. It uses Neovim's native `vim.loop` functionality to watch
+changed on disk. It uses Neovim's native `vim.uv` functionality to watch
 for file system events.
 
 ==============================================================================
@@ -29,6 +29,12 @@ debounce_duration~
   prevents the plugin from trying to reload a file too frequently, for
   example, while it's being written to by an external process.
 
+                                *nvim-background-autoread.debug_logging*
+debug_logging~
+  (boolean) default: false
+  If true, enables verbose logging for debugging purposes. This will print
+  messages to the Neovim command line about file events and buffer tracking.
+
 ==============================================================================
 3. Setup                         *nvim-background-autoread.setup*
 
@@ -39,11 +45,13 @@ Neovim configuration.
 
 `opts` is a table that can contain the following keys:
   - `debounce_duration` |nvim-background-autoread.debounce_duration|
+  - `debug_logging` |nvim-background-autoread.debug_logging|
 
 Example:
 >lua
   require('nvim-background-autoread').setup({
     debounce_duration = 500,
+    debug_logging = true,
   })
 <
 
