@@ -1,0 +1,51 @@
+*nvim-background-autoread.txt*      A plugin to automatically reload buffers.
+
+==============================================================================
+CONTENTS                                     *nvim-background-autoread-contents*
+
+  1. Introduction.................|nvim-background-autoread-introduction|
+  2. Configuration................|nvim-background-autoread-configuration|
+  3. Setup........................|nvim-background-autoread.setup|
+
+==============================================================================
+1. Introduction                  *nvim-background-autoread-introduction*
+
+This plugin automatically reloads buffers in the background when they are
+changed on disk. It uses Neovim's native `vim.loop` functionality to watch
+for file system events.
+
+==============================================================================
+2. Configuration                 *nvim-background-autoread-configuration*
+
+The plugin is configured by calling the |nvim-background-autoread.setup|
+function.
+
+The following options are available:
+
+                                *nvim-background-autoread.debounce_duration*
+debounce_duration~
+  (number) default: 200
+  The debounce duration in milliseconds for file system events. This
+  prevents the plugin from trying to reload a file too frequently, for
+  example, while it's being written to by an external process.
+
+==============================================================================
+3. Setup                         *nvim-background-autoread.setup*
+
+`require('nvim-background-autoread').setup(opts)`
+
+Sets up the plugin with the given options. This should be called in your
+Neovim configuration.
+
+`opts` is a table that can contain the following keys:
+  - `debounce_duration` |nvim-background-autoread.debounce_duration|
+
+Example:
+>lua
+  require('nvim-background-autoread').setup({
+    debounce_duration = 500,
+  })
+<
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
