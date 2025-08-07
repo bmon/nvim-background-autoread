@@ -1,7 +1,7 @@
 local M = {}
 
 local config = {
-	debounce_duration = 200,
+	debounce_duration = 50,
 	debug_logging = false,
 }
 
